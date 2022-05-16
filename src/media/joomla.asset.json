@@ -1,0 +1,22 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "mod_feedback",
+  "version": "0.63",
+  "description": "Feedback Module",
+  "license": "GNU GPL v2.0",
+  "assets": [
+    {
+      "name": "feedback.main",
+      "type": "style",
+      "uri": "mod_feedback/feedback.css"
+    },
+    {
+      "name": "feedback.main",
+      "type": "script",
+      "uri": "mod_feedback/feedback.js",
+      "attributes": {
+        "defer": true
+      }
+    }
+  ]
+}

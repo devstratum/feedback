@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="fields_section" label="MOD_FEEDBACK_FIELD">
+        <field
+            name="field_name"
+            type="text"
+            required="true"
+            label="MOD_FEEDBACK_NAME"
+            description="MOD_FEEDBACK_NAME_DESC"
+        />
+        <field
+            name="field_type"
+            type="list"
+            default="text"
+            validate="options"
+            label="MOD_FEEDBACK_TYPE"
+            description="MOD_FEEDBACK_TYPE_DESC"
+        >
+            <option value="text">MOD_FEEDBACK_TYPE_TEXT</option>
+            <option value="tel">MOD_FEEDBACK_TYPE_TEL</option>
+            <option value="email">MOD_FEEDBACK_TYPE_EMAIL</option>
+            <option value="number">MOD_FEEDBACK_TYPE_NUMBER</option>
+            <option value="date">MOD_FEEDBACK_TYPE_DATE</option>
+            <option value="textarea">MOD_FEEDBACK_TYPE_TEXTAREA</option>
+        </field>
+        <field
+            name="field_required"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="MOD_FEEDBACK_REQUIRED"
+            description="MOD_FEEDBACK_REQUIRED_DESC"
+        >
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+    </fieldset>
+</form>
