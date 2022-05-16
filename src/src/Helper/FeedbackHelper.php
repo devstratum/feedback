@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Feedback
- * @version         0.63
+ * @version         0.72
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
@@ -18,7 +18,6 @@ use Joomla\CMS\Response\JsonResponse;
 use Joomla\CMS\Helper\ModuleHelper;
 use Joomla\Input\Json;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\Date\Date;
 
 /**
  * Helper for mod_feedback
@@ -37,7 +36,7 @@ class FeedbackHelper
         $response = [];
 
         $app = Factory::getApplication();
-        $language = $app->getLanguage()->load('mod_feedback', JPATH_SITE);
+        $app->getLanguage()->load('mod_feedback', JPATH_SITE);
         $config = Factory::getConfig();
         $mailer = Factory::getMailer();
 
@@ -64,7 +63,8 @@ class FeedbackHelper
             // Prepare fields
             foreach ($fields_list as $key => $item) {
                 $fields_array[$key] = [
-                    'name' => $item->field_name,
+                    'label' => $item->field_label,
+                    'placeholder' => $item->field_placeholder,
                     'type' => $item->field_type,
                     'required' => $item->field_required,
                     'value' => trim(htmlspecialchars(stripslashes($fields_form[$key])))
@@ -75,14 +75,15 @@ class FeedbackHelper
             $errors = FeedbackHelper::validationFields($fields_array);
 
             if (!$errors) {
-
+                $message = ['mod_id' => $mod_id, 'type' => 'success', 'text' => 'form ready'];
+                $response = ['mod_id' => $mod_id, 'errors' => $errors];
             } else {
-                $message = ['type' => 'warning', 'text' => Text::_('MOD_FEEDBACK_ERROR_FIELDS')];
+                $message = ['mod_id' => $mod_id, 'type' => 'warning', 'text' => Text::_('MOD_FEEDBACK_ERROR_FIELDS')];
                 $response = ['mod_id' => $mod_id, 'errors' => $errors];
             }
 
         } else {
-            $message = ['type' => 'danger', 'text' => Text::_('MOD_FEEDBACK_ERROR_MODULE')];
+            $message = ['mod_id' => $mod_id, 'type' => 'danger', 'text' => Text::_('MOD_FEEDBACK_ERROR_MODULE')];
         }
 
         FeedbackHelper::setResponse($response, $message);
@@ -103,7 +104,7 @@ class FeedbackHelper
             if (!$item['value'] && $item['required']) {
                 $errors[] = [
                     'key' => $key,
-                    'name' => $item['name'],
+                    'label' => $item['label'],
                     'error' => Text::_('MOD_FEEDBACK_ERROR_REQUIRED')
                 ];
             }
@@ -114,7 +115,7 @@ class FeedbackHelper
                         if (!preg_match('/[0-9a-z_]+@[0-9a-z_^\.]+\.[a-z]{2,3}/i', $item['value'])) {
                             $errors[] = [
                                 'key' => $key,
-                                'name' => $item['name'],
+                                'label' => $item['label'],
                                 'error' => Text::_('MOD_FEEDBACK_ERROR_EMAIL')
                             ];
                         }
@@ -123,7 +124,7 @@ class FeedbackHelper
                         if (!is_numeric($item['value'])) {
                             $errors[] = [
                                 'key' => $key,
-                                'name' => $item['name'],
+                                'label' => $item['label'],
                                 'error' => Text::_('MOD_FEEDBACK_ERROR_NUMBER')
                             ];
                         }
@@ -132,7 +133,7 @@ class FeedbackHelper
                         if (!strtotime($item['value'])) {
                             $errors[] = [
                                 'key' => $key,
-                                'name' => $item['name'],
+                                'label' => $item['label'],
                                 'error' => Text::_('MOD_FEEDBACK_ERROR_DATE')
                             ];
                         }

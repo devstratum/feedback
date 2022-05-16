@@ -1,6 +1,6 @@
 /**
  * @package         Feedback
- * @version         0.63
+ * @version         0.72
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
@@ -24,20 +24,12 @@
     display: block;
     position: relative;
     box-sizing: border-box;
-    padding-bottom: 32px;
     background: var(--mod-feedback-form-back);
 }
 
 .mod-feedback__form p {
     padding: 6px 0;
     margin: 0;
-}
-
-.mod-feedback__form form {
-    display: block;
-    position: relative;
-    margin: 0;
-    padding: 0;
 }
 
 .mod-feedback__title {
@@ -53,7 +45,6 @@
     display: block;
     position: relative;
     padding: 16px 24px;
-    margin-bottom: 16px;
     color: var(--mod-feedback-header-color);
     background: var(--mod-feedback-header-back);
 }
@@ -61,8 +52,7 @@
 .mod-feedback__fields {
     display: block;
     position: relative;
-    padding: 16px 24px;
-    margin: 16px 0;
+    padding: 24px;
 }
 
 .mod-feedback__label {
@@ -85,12 +75,9 @@
     content: '';
     width: 8px;
     height: 8px;
-    top: 16px;
-    right: 10px;
+    top: 0;
+    left: 0;
     line-height: 0;
-    font-size: 140%;
-    font-weight: bold;
-    border-radius: 20px;
     background: var(--mod-feedback-field-border-error);
     z-index: 9;
 }
@@ -110,8 +97,7 @@
     position: relative;
     box-sizing: border-box;
     width: 100%;
-    height: 40px;
-    padding: 8px 24px 8px 16px;
+    padding: 8px 16px;
     margin: 0;
     border: 1px solid transparent;
     border-radius: 0;
@@ -175,15 +161,14 @@
 .mod-feedback__footer {
     display: block;
     position: relative;
-    padding: 0 24px;
+    padding: 0 24px 16px;
     color: var(--mod-feedback-footer-color);
 }
 
 .mod-feedback__submit {
     display: block;
     position: relative;
-    padding: 0 24px;
-    margin-top: 16px;
+    padding: 0 24px 24px;
 }
 
 .mod-feedback__submit .button-submit {
@@ -221,18 +206,12 @@
     cursor: default;
 }
 
-.mod-feedback__system {
-    display: block;
-    position: relative;
-}
-
 .mod-feedback__privacy {
     display: flex;
     position: relative;
-    justify-content: left;
+    justify-content: flex-start;
     align-items: center;
-    padding: 0 24px;
-    margin-top: 16px;
+    padding: 0 24px 24px;
 }
 
 .mod-feedback__privacy .privacy-checkbox {
@@ -277,6 +256,11 @@
     text-decoration: none;
 }
 
+.mod-feedback__privacy .privacy-text {
+    color: var(--mod-feedback-field-color)!important;
+    text-decoration: none;
+}
+
 .mod-feedback__alert {
     display: block;
     position: relative;
@@ -287,7 +271,7 @@
     display: block;
     position: relative;
     padding: 8px 16px;
-    margin: 4px 0;
+    margin: 0 0 24px;
     font-size: 90%;
     color: var(--mod-feedback-alert-color);
     background: var(--mod-feedback-alert-back);
@@ -319,11 +303,8 @@
 }
 
 @media (max-width: 559px) {
-    .mod-feedback__form {
-        padding-bottom: 16px;
-    }
-
     .mod-feedback__title {
+        font-size: 120%;
         padding: 16px;
     }
 
@@ -332,15 +313,15 @@
     }
 
     .mod-feedback__fields {
-        padding: 0 16px;
+        padding: 16px;
     }
 
     .mod-feedback__footer {
-        padding: 0 16px;
+        padding: 0 16px 16px;
     }
 
     .mod-feedback__submit {
-        padding: 0 16px;
+        padding: 0 16px 16px;
     }
 
     .mod-feedback__submit .button-submit {
@@ -348,7 +329,7 @@
     }
 
     .mod-feedback__privacy {
-        padding: 0 16px;
+        padding: 0 16px 16px;
     }
 
     .mod-feedback__alert {

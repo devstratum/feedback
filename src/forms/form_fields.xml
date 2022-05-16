@@ -2,11 +2,17 @@
 <form>
     <fieldset name="fields_section" label="MOD_FEEDBACK_FIELD">
         <field
-            name="field_name"
+            name="field_label"
             type="text"
             required="true"
-            label="MOD_FEEDBACK_NAME"
-            description="MOD_FEEDBACK_NAME_DESC"
+            label="MOD_FEEDBACK_LABEL"
+            description="MOD_FEEDBACK_LABEL_DESC"
+        />
+        <field
+            name="field_placeholder"
+            type="text"
+            label="MOD_FEEDBACK_PLACEHOLDER"
+            description="MOD_FEEDBACK_PLACEHOLDER_DESC"
         />
         <field
             name="field_type"

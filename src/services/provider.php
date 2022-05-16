@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Feedback
- * @version         0.63
+ * @version         0.72
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved

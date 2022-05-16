@@ -2,12 +2,12 @@
 <extension type="module" client="site" method="upgrade" version="4.0">
 	<name>MOD_FEEDBACK</name>
 	<author>Sergey Osipov</author>
-	<creationDate>16.05.2022</creationDate>
+	<creationDate>17.05.2022</creationDate>
 	<copyright>Copyright (c) 2022 Sergey Osipov. All rights reserved.</copyright>
 	<license>GNU General Public License v2.0</license>
 	<authorEmail>info@devstratum.ru</authorEmail>
 	<authorUrl>https://devstratum.ru</authorUrl>
-	<version>0.63</version>
+	<version>0.72</version>
 	<description>MOD_FEEDBACK_DESCRIPTION</description>    
     <namespace path="src">Devstratum\Module\Feedback</namespace>
     <scriptfile>script.php</scriptfile>
@@ -65,9 +65,6 @@
                     <option value="0">JNO</option>
                     <option value="1">JYES</option>
                 </field>
-
-                <field type="spacer" hr="true"/>
-                <field type="note" label="MOD_FEEDBACK_NOTE_FORMATS"/>
 
                 <field type="spacer" hr="true"/>
                 <field type="note" label="MOD_FEEDBACK_NOTE_PRIVACY"/>
@@ -132,23 +129,23 @@
                     default="Thank! Your message has been sent!"
                 />
                 <field
-                    name="form_label"
+                    name="form_labels"
                     type="radio"
                     layout="joomla.form.field.radio.switcher"
                     default="1"
-                    label="MOD_FEEDBACK_LABEL"
-                    description="MOD_FEEDBACK_LABEL_DESC"
+                    label="MOD_FEEDBACK_LABELS"
+                    description="MOD_FEEDBACK_LABELS_DESC"
                 >
                     <option value="0">JHIDE</option>
                     <option value="1">JSHOW</option>
                 </field>
                 <field
-                    name="form_placeholder"
+                    name="form_placeholders"
                     type="radio"
                     layout="joomla.form.field.radio.switcher"
                     default="1"
-                    label="MOD_FEEDBACK_PLACEHOLDER"
-                    description="MOD_FEEDBACK_PLACEHOLDER_DESC"
+                    label="MOD_FEEDBACK_PLACEHOLDERS"
+                    description="MOD_FEEDBACK_PLACEHOLDERS_DESC"
                 >
                     <option value="0">JHIDE</option>
                     <option value="1">JSHOW</option>
@@ -203,12 +200,12 @@
             </fieldset>
             <fieldset name="advanced">
                 <field
-					name="layout"
-					type="modulelayout"
-					label="JFIELD_ALT_LAYOUT_LABEL"
-					class="form-select"
-					validate="moduleLayout"
-				/>
+                    name="layout"
+                    type="modulelayout"
+                    label="JFIELD_ALT_LAYOUT_LABEL"
+                    class="form-select"
+                    validate="moduleLayout"
+                />
             </fieldset>
         </fields>
     </config>

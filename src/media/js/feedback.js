@@ -1,6 +1,6 @@
 /**
  * @package         Feedback
- * @version         0.63
+ * @version         0.72
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
@@ -9,14 +9,37 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    // Check privacy confirm
+    let privacy_checkbox = document.querySelectorAll('.mod-feedback__privacy .privacy-checkbox');
+    privacy_checkbox.forEach(function(item) {
+        item.addEventListener('click', function() {
+            let id = this.getAttribute('data-form-id');
+            let feedback_form = document.getElementById('mod_feedback_' + id);
+            let feedback_submit = feedback_form.querySelector('.mod-feedback__submit .button-submit');
+
+            if (this.classList.contains('checked')) {
+                this.classList.remove('checked');
+                feedback_submit.classList.add('disabled');
+                feedback_submit.setAttribute('disabled', '1');
+            } else {
+                this.classList.add('checked');
+                feedback_submit.classList.remove('disabled');
+                feedback_submit.removeAttribute('disabled');
+            }
+        });
+    });
+
+    // Action Submit
     let feedback_submits = document.querySelectorAll('.mod-feedback__submit .button-submit');
     feedback_submits.forEach(function(item) {
         item.addEventListener('click', function() {
             let id = this.getAttribute('data-form-id');
-            feedbackAction(id);
+            if (!this.getAttribute('disabled')) feedbackAction(id);
         });
     });
 
+    // Action Feedback Request
     function feedbackAction(id) {
         let feedback_form = document.getElementById('mod_feedback_' + id);
         let feedback_fields = feedback_form.querySelectorAll('.mod-input');
@@ -32,14 +55,17 @@ document.addEventListener('DOMContentLoaded', function() {
         feedbackRequest(id, feedback_data);
     }
 
+    // Alert message
     function feedbackAlert(message) {
-
+        let feedback_form = document.getElementById('mod_feedback_' + message.mod_id);
+        let feedback_alert = feedback_form.querySelector('.mod-feedback__alert');
+        feedback_alert.innerHTML = '<div class="mod-alert mod-alert-' + message.type + '">' + message.text + '</div>';
     }
 
+    // Check errors
     function feedbackUpdate(data) {
         if (data.length !== 0 && data.errors) {
             let feedback_form = document.getElementById('mod_feedback_' + data.mod_id);
-            // output errors
             data.errors.forEach(function(item) {
                 let feedback_input = feedback_form.querySelector('.feedback-field_' + item.key + ' .mod-feedback__input');
                 let feedback_error = feedback_form.querySelector('.feedback-field_' + item.key + ' .mod-feedback__error');
@@ -49,9 +75,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Clear errors
     function feedbackClear(id) {
         let feedback_form = document.getElementById('mod_feedback_' + id);
+        let feedback_alert = feedback_form.querySelector('.mod-feedback__alert');
         let feedback_fields = feedback_form.querySelectorAll('.mod-feedback__field');
+
+        feedback_alert.innerHTML = '';
         feedback_fields.forEach(function(item) {
             item.querySelector('.mod-feedback__input').classList.remove('error');
             item.querySelector('.mod-feedback__error').textContent = '';
@@ -77,8 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 //console.log(response);
                 let data = JSON.parse(response);
                 if (data.length !== 0) {
-                    //feedbackAlert(data.message);
                     feedbackClear(id);
+                    feedbackAlert(data.message);
                     feedbackUpdate(data.data);
                 }
             },
@@ -86,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('ajax Error');
             },
             onComplete: function() {
-                console.log('ajax Complete');
+
             }
         });
     }

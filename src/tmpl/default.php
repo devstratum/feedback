@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Feedback
- * @version         0.63
+ * @version         0.72
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
@@ -36,15 +36,17 @@
                     <?php
                     // check placeholder
                     $placeholder = '';
-                    if ($params->get('form_placeholder')) $placeholder = ' placeholder="' . $item->field_name . '"';
+                    if ($params->get('form_placeholders')) {
+                        $placeholder = $item->field_placeholder ? ' placeholder="' . $item->field_placeholder . '"' : ' placeholder="' . $item->field_label . '"';
+                    }
 
                     // check required
                     $required = '';
                     if ($item->field_required) $required = ' required';
                     ?>
 
-                    <?php if ($params->get('form_label')): ?>
-                        <div class="mod-feedback__label"><?php echo $item->field_name; ?></div>
+                    <?php if ($params->get('form_labels')): ?>
+                        <div class="mod-feedback__label"><?php echo $item->field_label; ?></div>
                     <?php endif; ?>
 
                     <div class="mod-feedback__input">
@@ -60,10 +62,10 @@
                                 echo '<input type="text" name="' . $key . '" class="mod-input mod-input-email"' . $required . $placeholder . '/>';
                                 break;
                             case 'number':
-                                echo '<input type="text" name="' . $key . '" class="mod-input mod-input-number"' . $required . $placeholder . '/>';
+                                echo '<input type="number" name="' . $key . '" class="mod-input mod-input-number"' . $required . $placeholder . '/>';
                                 break;
                             case 'date':
-                                echo '<input type="text" name="' . $key . '" class="mod-input mod-input-date"' . $required . $placeholder . '/>';
+                                echo '<input type="date" name="' . $key . '" class="mod-input mod-input-date"' . $required . $placeholder . '/>';
                                 break;
                             case 'textarea':
                                 echo '<textarea name="' . $key . '" class="mod-input mod-input-textarea"' . $required . $placeholder . '></textarea>';
@@ -82,23 +84,22 @@
             </div>
         <?php endif; ?>
 
-        <div class="mod-feedback__system">
-            <div class="mod-feedback__alert"></div>
-        </div>
+        <div class="mod-feedback__alert"></div>
 
         <?php if ($params->get('form_privacy')): ?>
+            <?php $disabled = ' disabled'; ?>
             <div class="mod-feedback__privacy">
-                <div class="privacy-checkbox checked" data-form-id="<?php echo $module->id; ?>"></div>
+                <div class="privacy-checkbox" data-form-id="<?php echo $module->id; ?>"></div>
                 <?php if ($params->get('form_privacy_url')): ?>
                     <a class="privacy-link" href="<?php echo $params->get('form_privacy_url'); ?>" target="_blank"><?php echo $params->get('form_privacy_text'); ?></a>
                 <?php else: ?>
-                    <div class="privacy-link"><?php echo $params->get('form_privacy_text'); ?></div>
+                    <div class="privacy-link privacy-text"><?php echo $params->get('form_privacy_text'); ?></div>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
 
         <div class="mod-feedback__submit">
-            <button class="button-submit" data-form-id="<?php echo $module->id; ?>">
+            <button class="button-submit<?php echo $disabled; ?>"<?php echo $disabled; ?> data-form-id="<?php echo $module->id; ?>">
                 <span><?php echo $params->get('form_submit'); ?></span>
             </button>
         </div>
