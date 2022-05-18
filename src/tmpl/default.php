@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Feedback
- * @version         0.72
+ * @version         0.97.1
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
@@ -101,6 +101,7 @@
         <div class="mod-feedback__submit">
             <button class="button-submit<?php echo $disabled; ?>"<?php echo $disabled; ?> data-form-id="<?php echo $module->id; ?>">
                 <span><?php echo $params->get('form_submit'); ?></span>
+                <span class="mod-feedback__progress"></span>
             </button>
         </div>
     </div>

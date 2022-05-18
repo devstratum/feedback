@@ -7,7 +7,7 @@
 	<license>GNU General Public License v2.0</license>
 	<authorEmail>info@devstratum.ru</authorEmail>
 	<authorUrl>https://devstratum.ru</authorUrl>
-	<version>0.72</version>
+	<version>0.97.1</version>
 	<description>MOD_FEEDBACK_DESCRIPTION</description>    
     <namespace path="src">Devstratum\Module\Feedback</namespace>
     <scriptfile>script.php</scriptfile>

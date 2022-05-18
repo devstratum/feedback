@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Feedback
- * @version         0.72
+ * @version         0.97.1
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
@@ -21,12 +21,11 @@ use Joomla\CMS\Language\Text;
 
 /**
  * Helper for mod_feedback
- *
  */
 class FeedbackHelper
 {
     /**
-     * Method get ajax
+     * Method get Ajax
      *
      * @throws
      */
@@ -37,8 +36,6 @@ class FeedbackHelper
 
         $app = Factory::getApplication();
         $app->getLanguage()->load('mod_feedback', JPATH_SITE);
-        $config = Factory::getConfig();
-        $mailer = Factory::getMailer();
 
         // Add json input
         if ($data = new Json())
@@ -72,27 +69,99 @@ class FeedbackHelper
             }
 
             // Validation
-            $errors = FeedbackHelper::validationFields($fields_array);
+            $fields_errors = FeedbackHelper::validationFields($fields_array);
 
-            if (!$errors) {
-                $message = ['mod_id' => $mod_id, 'type' => 'success', 'text' => 'form ready'];
-                $response = ['mod_id' => $mod_id, 'errors' => $errors];
+            if (!$fields_errors) {
+                // Send mail
+                $mailer_error = FeedbackHelper::sendMail($mod_params, $fields_array);
+
+                if (!$mailer_error) {
+                    $message = ['type' => 'success', 'text' => $mod_params->form_success];
+                } else {
+                    $message = ['type' => 'danger', 'text' => $mailer_error];
+                }
             } else {
-                $message = ['mod_id' => $mod_id, 'type' => 'warning', 'text' => Text::_('MOD_FEEDBACK_ERROR_FIELDS')];
-                $response = ['mod_id' => $mod_id, 'errors' => $errors];
+                $message = ['type' => 'warning', 'text' => Text::_('MOD_FEEDBACK_ERROR_FIELDS')];
+                $response = ['mod_id' => $mod_id, 'errors' => $fields_errors];
             }
-
         } else {
-            $message = ['mod_id' => $mod_id, 'type' => 'danger', 'text' => Text::_('MOD_FEEDBACK_ERROR_MODULE')];
+            $message = ['type' => 'danger', 'text' => Text::_('MOD_FEEDBACK_ERROR_MODULE')];
         }
 
         FeedbackHelper::setResponse($response, $message);
     }
 
     /**
-     * Method validation fields
+     * Method send Mail
      *
-     * @param array $fields_array
+     * @param   object $mod_params
+     * @param   array $fields_array
+     * @throws
+     *
+     * @return  mixed
+     */
+    public static function sendMail($mod_params, $fields_array)
+    {
+        $error = '';
+        $config = Factory::getConfig();
+        $mailer = Factory::getMailer();
+
+        if ($config->get('mailonline')) {
+
+            $output = '';
+
+            // Prepare mail output
+            if ($mod_params->mail_header) {
+                $output .= $mod_params->mail_header;
+            }
+
+            foreach ($fields_array as $item) {
+                if ($item['value']) {
+                    $output .= '<p><b>' . $item['label'] . ': </b><br/>' . $item['value'] . '</p>'. "\n";
+                }
+            }
+
+            if ($mod_params->mail_footer) {
+                $output .= $mod_params->mail_footer;
+            }
+
+            // Create email
+            $mailer->CharSet = 'utf-8';
+            $mailer->isHTML(true);
+            $mailer->setFrom($config->get('mailfrom'), $config->get('fromname'));
+            $mailer->Subject = $mod_params->form_title . ' - ' . $config->get('sitename');
+
+            if ($mod_params->form_email_from) {
+                $mailer->addAddress($mod_params->form_email_from);
+            } else {
+                $mailer->addAddress($config->get('mailfrom'));
+            }
+
+            if ($mod_params->form_email_copy) {
+                $mailer->AddCC($mod_params->form_email_copy);
+            }
+
+            if ($mod_params->form_email_admin) {
+                $mailer->AddBCC($config->get('mailfrom'));
+            }
+
+            $mailer->msgHTML($output);
+
+            // Send email
+            if (!$mailer->send()) {
+                $error = Text::_('MOD_FEEDBACK_ERROR_MAILER_ERROR' . ' :: ' . $mailer->ErrorInfo);
+            }
+        } else {
+            $error = Text::_('MOD_FEEDBACK_ERROR_MAILER_DISABLE');
+        }
+
+        return $error;
+    }
+
+    /**
+     * Method validation Fields
+     *
+     * @param   array $fields_array
      * @throws
      *
      * @return  array
@@ -146,10 +215,10 @@ class FeedbackHelper
     }
 
     /**
-     * Method set response
+     * Method set Response
      *
-     * @param array $response
-     * @param array $message
+     * @param   array $response
+     * @param   array $message
      *
      * @throws
      */

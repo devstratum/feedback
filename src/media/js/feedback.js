@@ -1,6 +1,6 @@
 /**
  * @package         Feedback
- * @version         0.72
+ * @version         0.97.1
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
@@ -9,7 +9,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-
     // Check privacy confirm
     let privacy_checkbox = document.querySelectorAll('.mod-feedback__privacy .privacy-checkbox');
     privacy_checkbox.forEach(function(item) {
@@ -43,7 +42,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function feedbackAction(id) {
         let feedback_form = document.getElementById('mod_feedback_' + id);
         let feedback_fields = feedback_form.querySelectorAll('.mod-input');
+        let feedback_submit = feedback_form.querySelector('.mod-feedback__submit .button-submit');
+        let feedback_progress = feedback_form.querySelector('.mod-feedback__progress');
         let feedback_data = {};
+
+        feedback_submit.classList.add('freeze');
+        feedback_submit.setAttribute('disabled', '1');
+        feedback_progress.classList.add('active');
 
         feedback_fields.forEach(function(item) {
             let type = item.getAttribute('type');
@@ -52,20 +57,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        feedbackRequest(id, feedback_data);
+        setTimeout(function() {
+            feedbackRequest(id, feedback_data);
+        }, 300);
     }
 
     // Alert message
-    function feedbackAlert(message) {
-        let feedback_form = document.getElementById('mod_feedback_' + message.mod_id);
+    function feedbackAlert(id, message) {
+        let feedback_form = document.getElementById('mod_feedback_' + id);
         let feedback_alert = feedback_form.querySelector('.mod-feedback__alert');
         feedback_alert.innerHTML = '<div class="mod-alert mod-alert-' + message.type + '">' + message.text + '</div>';
     }
 
     // Check errors
-    function feedbackUpdate(data) {
+    function feedbackUpdate(id, data) {
         if (data.length !== 0 && data.errors) {
-            let feedback_form = document.getElementById('mod_feedback_' + data.mod_id);
+            let feedback_form = document.getElementById('mod_feedback_' + id);
             data.errors.forEach(function(item) {
                 let feedback_input = feedback_form.querySelector('.feedback-field_' + item.key + ' .mod-feedback__input');
                 let feedback_error = feedback_form.querySelector('.feedback-field_' + item.key + ' .mod-feedback__error');
@@ -108,15 +115,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 let data = JSON.parse(response);
                 if (data.length !== 0) {
                     feedbackClear(id);
-                    feedbackAlert(data.message);
-                    feedbackUpdate(data.data);
+                    feedbackAlert(id, data.message);
+                    feedbackUpdate(id, data.data);
                 }
             },
             onError: function() {
-                console.log('ajax Error');
+                let message = {"type":"danger","text":"Error: unable to send a message"};
+                feedbackAlert(id, message);
             },
             onComplete: function() {
-
+                let feedback_form = document.getElementById('mod_feedback_' + id);
+                let feedback_submit = feedback_form.querySelector('.mod-feedback__submit .button-submit');
+                let feedback_progress = feedback_form.querySelector('.mod-feedback__progress');
+                feedback_submit.classList.remove('freeze');
+                feedback_submit.removeAttribute('disabled');
+                feedback_progress.classList.remove('active');
             }
         });
     }

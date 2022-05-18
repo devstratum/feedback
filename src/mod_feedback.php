@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Feedback
- * @version         0.72
+ * @version         0.97.1
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
@@ -11,7 +11,6 @@
 
 \defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
 use Joomla\CMS\Helper\ModuleHelper;
 use Devstratum\Module\Feedback\Site\Helper\FeedbackHelper;
 
