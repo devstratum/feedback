@@ -18,9 +18,23 @@ Module-constructor of simple contact forms for Joomla CMS
 
 Standart install in Joomla CMS -» Upload Module archive file -» **mod_feedback.zip**
 
-## Usage
+## Overview
 
-....
+**View Forms on website page**: Light or Dark theme
+
+![com_metadesc_01](https://github.com/devstratum/feedback/blob/main/mod_feedback_01.png)
+
+**Module settings**: Recipient and Privacy Policy
+
+![com_metadesc_01](https://github.com/devstratum/feedback/blob/main/mod_feedback_02.png)
+
+**Form settings**: Options of form, Layouts header and footer block
+
+![com_metadesc_01](https://github.com/devstratum/feedback/blob/main/mod_feedback_03.png)
+
+**Form fields**: Create and manage form fields
+
+![com_metadesc_01](https://github.com/devstratum/feedback/blob/main/mod_feedback_04.png)
 
 ## Info
 
