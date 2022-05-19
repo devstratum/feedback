@@ -4,9 +4,11 @@ Module-constructor of simple contact forms for Joomla CMS
 
 ## Features
 
-* Create and manage fields
-* Send form Ajax support
+* Create and manage form fields
+* Ajax support send and validation data
+* Fields types: text, telephone, email, number, date, textarea
 * Joomla 4 CMS
+* Responsive design
 * Color theme: Light | Dark
 * Language: English | Russian
 
