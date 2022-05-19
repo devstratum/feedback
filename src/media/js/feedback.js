@@ -67,6 +67,14 @@ document.addEventListener('DOMContentLoaded', function() {
         let feedback_form = document.getElementById('mod_feedback_' + id);
         let feedback_alert = feedback_form.querySelector('.mod-feedback__alert');
         feedback_alert.innerHTML = '<div class="mod-alert mod-alert-' + message.type + '">' + message.text + '</div>';
+
+        // Clear fields values
+        if (message.type === 'success') {
+            let feedback_fields = feedback_form.querySelectorAll('.mod-feedback__fields .mod-input');
+            feedback_fields.forEach(function(item) {
+                item.value = '';
+            });
+        }
     }
 
     // Check errors
