@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Feedback
- * @version         0.97.1
+ * @version         1.0.3
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
@@ -111,6 +111,10 @@ class FeedbackHelper
             $output = '';
 
             // Prepare mail output
+            if (!$mod_params->form_title) {
+                $mod_params->form_title = Text::_('MOD_FEEDBACK_TITLE_DEFAULT');
+            }
+
             if ($mod_params->mail_header) {
                 $output .= $mod_params->mail_header;
             }
@@ -131,8 +135,8 @@ class FeedbackHelper
             $mailer->setFrom($config->get('mailfrom'), $config->get('fromname'));
             $mailer->Subject = $mod_params->form_title . ' - ' . $config->get('sitename');
 
-            if ($mod_params->form_email_from) {
-                $mailer->addAddress($mod_params->form_email_from);
+            if ($mod_params->form_email_to) {
+                $mailer->addAddress($mod_params->form_email_to);
             } else {
                 $mailer->addAddress($config->get('mailfrom'));
             }

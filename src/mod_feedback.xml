@@ -2,13 +2,13 @@
 <extension type="module" client="site" method="upgrade" version="4.0">
 	<name>MOD_FEEDBACK</name>
 	<author>Sergey Osipov</author>
-	<creationDate>17.05.2022</creationDate>
+	<creationDate>19.05.2022</creationDate>
 	<copyright>Copyright (c) 2022 Sergey Osipov. All rights reserved.</copyright>
 	<license>GNU General Public License v2.0</license>
 	<authorEmail>info@devstratum.ru</authorEmail>
 	<authorUrl>https://devstratum.ru</authorUrl>
-	<version>0.97.1</version>
-	<description>MOD_FEEDBACK_DESCRIPTION</description>    
+	<version>1.0.3</version>
+	<description>MOD_FEEDBACK_DESCRIPTION</description>
     <namespace path="src">Devstratum\Module\Feedback</namespace>
     <scriptfile>script.php</scriptfile>
     <files>
@@ -39,12 +39,12 @@
             <fieldset name="basic">
                 <field type="note" label="MOD_FEEDBACK_NOTE_RECIPIENT"/>
                 <field
-                    name="form_email_from"
+                    name="form_email_to"
                     type="email"
                     required="true"
                     validate="email"
-                    label="MOD_FEEDBACK_EMAILFROM"
-                    description="MOD_FEEDBACK_EMAILFROM_DESC"
+                    label="MOD_FEEDBACK_EMAILTO"
+                    description="MOD_FEEDBACK_EMAILTO_DESC"
                 />
                 <field
                     name="form_email_copy"
@@ -109,6 +109,7 @@
                 <field
                     name="form_title"
                     type="text"
+                    required="true"
                     label="MOD_FEEDBACK_TITLE"
                     description="MOD_FEEDBACK_TITLE_DESC"
                 />
@@ -128,6 +129,17 @@
                     description="MOD_FEEDBACK_SUCCESS_DESC"
                     default="Thank! Your message has been sent!"
                 />
+                <field
+                    name="form_titles"
+                    type="radio"
+                    layout="joomla.form.field.radio.switcher"
+                    default="1"
+                    label="MOD_FEEDBACK_TITLES"
+                    description="MOD_FEEDBACK_TITLES_DESC"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
                 <field
                     name="form_labels"
                     type="radio"

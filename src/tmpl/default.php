@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Feedback
- * @version         0.97.1
+ * @version         1.0.3
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
@@ -18,7 +18,7 @@
 
 <div class="mod-feedback mod-feedback-<?php echo $params->get('form_theme'); ?>" id="mod_feedback_<?php echo $module->id; ?>" data-form-id="<?php echo $module->id; ?>">
     <div class="mod-feedback__form">
-        <?php if ($params->get('form_title')): ?>
+        <?php if ($params->get('form_titles')): ?>
             <div class="mod-feedback__title">
                 <span><?php echo $params->get('form_title'); ?></span>
             </div>

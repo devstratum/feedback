@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Feedback
- * @version         0.97.1
+ * @version         1.0.3
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
@@ -12,7 +12,6 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Helper\ModuleHelper;
-use Devstratum\Module\Feedback\Site\Helper\FeedbackHelper;
 
 /** @var \Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $app->getDocument()->getWebAssetManager();
