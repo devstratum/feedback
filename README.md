@@ -2,4 +2,28 @@
 
 Module-constructor of simple contact forms for Joomla CMS
 
-## In developing...
+## Features
+
+* Create and manage fields
+* Send form Ajax support
+* Joomla 4 CMS
+* Color theme: Light | Dark
+* Language: English | Russian
+
+## Install
+
+[See and go to Releases](https://github.com/devstratum/feedback/releases)
+
+Standart install in Joomla CMS -» Upload Module archive file -» **mod_feedback.zip**
+
+## Usage
+
+....
+
+## Info
+
+Version: 1.0.3  
+License: GNU GPL v2.0  
+Author: Sergey Osipov  
+Website: https://devstratum.ru  
+Email: info@devstratum.ru
