@@ -24,7 +24,7 @@
             </div>
         <?php endif; ?>
 
-        <?php if ($params->get('form_header')): ?>
+        <?php if (trim($params->get('form_header'))): ?>
             <div class="mod-feedback__header">
                 <?php echo $params->get('form_header'); ?>
             </div>
@@ -78,7 +78,7 @@
             <?php $ii++; endforeach; ?>
         </div>
 
-        <?php if ($params->get('form_footer')): ?>
+        <?php if (trim($params->get('form_footer'))): ?>
             <div class="mod-feedback__footer">
                 <?php echo $params->get('form_footer'); ?>
             </div>
