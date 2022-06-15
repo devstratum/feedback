@@ -14,6 +14,11 @@ Module is available in [Joomla! Extensions Directory™](https://extensions.joom
 * Color theme: Light | Dark
 * Language: English | Russian
 
+## Requirements
+
+* Joomla 4.1.0 or higher
+* PHP 7.2 or higher
+
 ## Install
 
 [See and go to Releases](https://github.com/devstratum/feedback/releases)
