@@ -19,6 +19,12 @@ Module is available in [Joomla! Extensions Directory™](https://extensions.joom
 * Joomla 4.1.0 or higher
 * PHP 7.2 or higher
 
+## Donate
+
+You can support the author's products and new projects
+
+* [Donate via CloudTips](https://pay.cloudtips.ru/p/1daecc1f)
+
 ## Install
 
 [See and go to Releases](https://github.com/devstratum/feedback/releases)
