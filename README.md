@@ -51,7 +51,7 @@ Standart install in Joomla CMS -» Upload Module archive file -» **mod_feedback
 
 ## Info
 
-Version: 1.0.3  
+Version: 1.0.4  
 License: GNU GPL v2.0  
 Author: Sergey Osipov  
 Website: https://devstratum.ru  
