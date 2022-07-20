@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Feedback
- * @version         1.0.3
+ * @version         1.0.4
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
  * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
@@ -120,7 +120,7 @@ class FeedbackHelper
             }
 
             foreach ($fields_array as $item) {
-                if ($item['value']) {
+                if (!empty($item['value'])) {
                     $output .= '<p><b>' . $item['label'] . ': </b><br/>' . $item['value'] . '</p>'. "\n";
                 }
             }
@@ -172,9 +172,11 @@ class FeedbackHelper
      */
     public static function validationFields($fields_array)
     {
+        $mailer = Factory::getMailer();
+
         $errors = [];
         foreach ($fields_array as $key => $item) {
-            if (!$item['value'] && $item['required']) {
+            if (empty($item['value']) && $item['required']) {
                 $errors[] = [
                     'key' => $key,
                     'label' => $item['label'],
@@ -182,10 +184,10 @@ class FeedbackHelper
                 ];
             }
 
-            if ($item['value']) {
+            if (!empty($item['value'])) {
                 switch($item['type']) {
                     case 'email':
-                        if (!preg_match('/[0-9a-z_]+@[0-9a-z_^\.]+\.[a-z]{2,3}/i', $item['value'])) {
+                        if (!$mailer->validateAddress($item['value'])) {
                             $errors[] = [
                                 'key' => $key,
                                 'label' => $item['label'],
