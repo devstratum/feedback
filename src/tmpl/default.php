@@ -1,18 +1,22 @@
 <?php
 /**
  * @package         Feedback
- * @version         1.0.3
+ * @version         1.1.0
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
- * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
+ * @copyright       Copyright (c) 2023 Sergey Osipov. All Rights Reserved
  * @license         GNU General Public License v2.0
  * @report          https://github.com/devstratum/feedback/issues
  */
 
 \defined('_JEXEC') or die;
 
-/** @var object $module */
-/** @var object $fields_list */
+/**
+ * @param object $module
+ * @param object $fields_list
+ */
+
+$disabled = '';
 
 ?>
 
@@ -24,7 +28,7 @@
             </div>
         <?php endif; ?>
 
-        <?php if (trim($params->get('form_header'))): ?>
+        <?php if (trim((string) $params->get('form_header'))): ?>
             <div class="mod-feedback__header">
                 <?php echo $params->get('form_header'); ?>
             </div>
@@ -32,20 +36,25 @@
 
         <div class="mod-feedback__fields">
             <?php $ii = 0; foreach ($fields_list as $key => $item): ?>
-                <div class="mod-feedback__field feedback-field_<?php echo $key; ?> <?php if ($item->field_required) echo 'required'; ?>">
+                <?php
+                // check required
+                $required = '';
+                if ($item->field_required && $item->field_type != 'hidden') {
+                    $required = ' required';
+                } elseif ($item->field_type == 'hidden')  {
+                    $required = ' hidden';
+                }
+                ?>
+                <div class="mod-feedback__field feedback-field_<?php echo $key; ?><?php echo $required; ?>">
                     <?php
                     // check placeholder
                     $placeholder = '';
                     if ($params->get('form_placeholders')) {
                         $placeholder = $item->field_placeholder ? ' placeholder="' . $item->field_placeholder . '"' : ' placeholder="' . $item->field_label . '"';
                     }
-
-                    // check required
-                    $required = '';
-                    if ($item->field_required) $required = ' required';
                     ?>
 
-                    <?php if ($params->get('form_labels')): ?>
+                    <?php if ($params->get('form_labels') && $item->field_type != 'hidden'): ?>
                         <div class="mod-feedback__label"><?php echo $item->field_label; ?></div>
                     <?php endif; ?>
 
@@ -56,7 +65,7 @@
                                 echo '<input type="text" name="' . $key . '" class="mod-input mod-input-text"' . $required . $placeholder . '/>';
                                 break;
                             case 'tel':
-                                echo '<input type="text" name="' . $key . '" class="mod-input mod-input-tel"' . $required . $placeholder . '/>';
+                                echo '<input type="tel" name="' . $key . '" class="mod-input mod-input-tel"' . $required . $placeholder . '/>';
                                 break;
                             case 'email':
                                 echo '<input type="text" name="' . $key . '" class="mod-input mod-input-email"' . $required . $placeholder . '/>';
@@ -70,6 +79,9 @@
                             case 'textarea':
                                 echo '<textarea name="' . $key . '" class="mod-input mod-input-textarea"' . $required . $placeholder . '></textarea>';
                                 break;
+                            case 'hidden':
+                                echo '<input type="hidden" name="' . $key . '" class="mod-input mod-input-hidden"/>';
+                                break;
                         }
                         ?>
                     </div>
@@ -78,7 +90,7 @@
             <?php $ii++; endforeach; ?>
         </div>
 
-        <?php if (trim($params->get('form_footer'))): ?>
+        <?php if (trim((string) $params->get('form_footer'))): ?>
             <div class="mod-feedback__footer">
                 <?php echo $params->get('form_footer'); ?>
             </div>

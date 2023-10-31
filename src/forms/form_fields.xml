@@ -28,6 +28,7 @@
             <option value="number">MOD_FEEDBACK_TYPE_NUMBER</option>
             <option value="date">MOD_FEEDBACK_TYPE_DATE</option>
             <option value="textarea">MOD_FEEDBACK_TYPE_TEXTAREA</option>
+            <option value="hidden">MOD_FEEDBACK_TYPE_HIDDEN</option>
         </field>
         <field
             name="field_required"

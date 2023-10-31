@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" client="site" method="upgrade" version="4.0">
+<extension type="module" client="site" method="upgrade" version="4.3">
 	<name>MOD_FEEDBACK</name>
 	<author>Sergey Osipov</author>
-	<creationDate>20.07.2022</creationDate>
-	<copyright>Copyright (c) 2022 Sergey Osipov. All rights reserved.</copyright>
+	<creationDate>01.11.2023</creationDate>
+	<copyright>Copyright (c) 2023 Sergey Osipov. All rights reserved.</copyright>
 	<license>GNU General Public License v2.0</license>
 	<authorEmail>info@devstratum.ru</authorEmail>
 	<authorUrl>https://devstratum.ru</authorUrl>
-	<version>1.0.4</version>
+	<version>1.1.0</version>
 	<description>MOD_FEEDBACK_DESCRIPTION</description>
     <namespace path="src">Devstratum\Module\Feedback</namespace>
     <scriptfile>script.php</scriptfile>
@@ -19,10 +19,10 @@
         <folder>tmpl</folder>
     </files>
     <languages>
-        <language tag="en-GB">language/en-GB/en-GB.mod_feedback.ini</language>
-        <language tag="en-GB">language/en-GB/en-GB.mod_feedback.sys.ini</language>
-        <language tag="ru-RU">language/ru-RU/ru-RU.mod_feedback.ini</language>
-        <language tag="ru-RU">language/ru-RU/ru-RU.mod_feedback.sys.ini</language>
+        <language tag="en-GB">language/en-GB/mod_feedback.ini</language>
+        <language tag="en-GB">language/en-GB/mod_feedback.sys.ini</language>
+        <language tag="ru-RU">language/ru-RU/mod_feedback.ini</language>
+        <language tag="ru-RU">language/ru-RU/mod_feedback.sys.ini</language>
     </languages>    
     <media destination="mod_feedback" folder="media">
         <filename>joomla.asset.json</filename>
@@ -130,6 +130,12 @@
                     default="Thank! Your message has been sent!"
                 />
                 <field
+                    name="form_redirect"
+                    type="text"
+                    label="MOD_FEEDBACK_REDIRECT"
+                    description="MOD_FEEDBACK_REDIRECT_DESC"
+                />
+                <field
                     name="form_titles"
                     type="radio"
                     layout="joomla.form.field.radio.switcher"
@@ -188,7 +194,7 @@
                     layout="joomla.form.field.subform.repeatable"
                     groupByFieldset="true"
                     min="1"
-                    max="20"
+                    max="30"
                     label="MOD_FEEDBACK_FIELDS"
                     description="MOD_FEEDBACK_FIELDS_DESC"
                 />

@@ -1,9 +1,9 @@
 /**
  * @package         Feedback
- * @version         1.0.3
+ * @version         1.1.0
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
- * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
+ * @copyright       Copyright (c) 2023 Sergey Osipov. All Rights Reserved
  * @license         GNU General Public License v2.0
  * @report          https://github.com/devstratum/feedback/issues
  */
@@ -66,7 +66,11 @@
 .mod-feedback__field {
     display: block;
     position: relative;
-    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+.mod-feedback__field.hidden {
+    display: none;
 }
 
 .mod-feedback__field.required .mod-feedback__input::after {
@@ -82,7 +86,7 @@
     z-index: 9;
 }
 
-.mod-feedback__field:last-child {
+.mod-feedback__field:first-child {
     margin: 0;
 }
 
@@ -97,6 +101,7 @@
     position: relative;
     box-sizing: border-box;
     width: 100%;
+    height: 56px;
     padding: 8px 16px;
     margin: 0;
     border: 1px solid transparent;
@@ -146,12 +151,15 @@
 }
 
 .mod-feedback__submit .button-submit {
-    display: inline-block;
+    display: flex;
     position: relative;
     box-sizing: border-box;
-    max-width: 196px;
+    justify-content: center;
+    align-items: center;
+    max-width: 256px;
     width: 100%;
-    padding: 16px;
+    height: 56px;
+    padding: 8px 16px;
     margin: 0;
     text-align: center;
     text-transform: uppercase;

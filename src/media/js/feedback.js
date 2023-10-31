@@ -1,9 +1,9 @@
 /**
  * @package         Feedback
- * @version         1.0.3
+ * @version         1.1.0
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
- * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
+ * @copyright       Copyright (c) 2023 Sergey Osipov. All Rights Reserved
  * @license         GNU General Public License v2.0
  * @report          https://github.com/devstratum/feedback/issues
  */
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         setTimeout(function() {
             feedbackRequest(id, feedback_data);
-        }, 300);
+        }, 200);
     }
 
     // Alert message
@@ -74,6 +74,12 @@ document.addEventListener('DOMContentLoaded', function() {
             feedback_fields.forEach(function(item) {
                 item.value = '';
             });
+
+            if (message.redirect) {
+                setTimeout(function () {
+                    location.href = message.redirect;
+                }, 300);
+            }
         }
     }
 
@@ -119,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             },
             onSuccess: function(response) {
-                //console.log(response);
                 let data = JSON.parse(response);
                 if (data.length !== 0) {
                     feedbackClear(id);

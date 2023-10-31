@@ -1,10 +1,10 @@
 <?php
 /**
  * @package         Feedback
- * @version         1.0.3
+ * @version         1.1.0
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
- * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
+ * @copyright       Copyright (c) 2023 Sergey Osipov. All Rights Reserved
  * @license         GNU General Public License v2.0
  * @report          https://github.com/devstratum/feedback/issues
  */
@@ -13,7 +13,6 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Version;
-use Joomla\CMS\Installer\Installer;
 use Joomla\CMS\Installer\InstallerAdapter;
 use Joomla\CMS\Language\Text;
 
@@ -22,25 +21,27 @@ class mod_feedbackInstallerScript
     /**
      * Minimum PHP version required to install the extension
      *
-     * @var  string
+     * @param   string
+     * @since   1.0.0
      */
-	protected $minimumPhp = '7.2';
+	protected $minimumPhp = '7.4';
 
     /**
      * Minimum Joomla version required to install the extension
      *
-     * @var  string
+     * @param   string
+     * @since   1.0.0
      */
-	protected $minimumJoomla = '4.1.0';
+	protected $minimumJoomla = '4.3.0';
 
     /**
      * Runs right before any installation action
      *
-     * @param   string            $type    Type of PostFlight action. Possible values are:
+     * @param   string            $type    Type of PostFlight action.
      * @param   InstallerAdapter  $parent  Parent object calling object.
      * @throws
-     *
-     * @return  boolean     True on success. False on failure
+     * @return  boolean True on success. False on failure
+     * @since   1.0.0
      */
 	public function preflight($type, $parent)
 	{

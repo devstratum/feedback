@@ -1,10 +1,10 @@
 <?php
 /**
  * @package         Feedback
- * @version         1.0.4
+ * @version         1.1.0
  * @author          Sergey Osipov <info@devstratum.ru>
  * @website         https://devstratum.ru
- * @copyright       Copyright (c) 2022 Sergey Osipov. All Rights Reserved
+ * @copyright       Copyright (c) 2023 Sergey Osipov. All Rights Reserved
  * @license         GNU General Public License v2.0
  * @report          https://github.com/devstratum/feedback/issues
  */
@@ -21,6 +21,8 @@ use Joomla\CMS\Language\Text;
 
 /**
  * Helper for mod_feedback
+ *
+ * @since   1.0.0
  */
 class FeedbackHelper
 {
@@ -28,6 +30,7 @@ class FeedbackHelper
      * Method get Ajax
      *
      * @throws
+     * @since   1.0.0
      */
     public static function getAjax()
     {
@@ -76,16 +79,16 @@ class FeedbackHelper
                 $mailer_error = FeedbackHelper::sendMail($mod_params, $fields_array);
 
                 if (!$mailer_error) {
-                    $message = ['type' => 'success', 'text' => $mod_params->form_success];
+                    $message = ['type' => 'success', 'text' => $mod_params->form_success, 'redirect' => $mod_params->form_redirect];
                 } else {
-                    $message = ['type' => 'danger', 'text' => $mailer_error];
+                    $message = ['type' => 'danger', 'text' => $mailer_error, 'redirect' => $mod_params->form_redirect];
                 }
             } else {
-                $message = ['type' => 'warning', 'text' => Text::_('MOD_FEEDBACK_ERROR_FIELDS')];
+                $message = ['type' => 'warning', 'text' => Text::_('MOD_FEEDBACK_ERROR_FIELDS'), 'redirect' => $mod_params->form_redirect];
                 $response = ['mod_id' => $mod_id, 'errors' => $fields_errors];
             }
         } else {
-            $message = ['type' => 'danger', 'text' => Text::_('MOD_FEEDBACK_ERROR_MODULE')];
+            $message = ['type' => 'danger', 'text' => Text::_('MOD_FEEDBACK_ERROR_MODULE'), 'redirect' => $mod_params->form_redirect];
         }
 
         FeedbackHelper::setResponse($response, $message);
@@ -94,11 +97,11 @@ class FeedbackHelper
     /**
      * Method send Mail
      *
-     * @param   object $mod_params
-     * @param   array $fields_array
+     * @param   object  $mod_params
+     * @param   array   $fields_array
      * @throws
-     *
      * @return  mixed
+     * @since   1.0.0
      */
     public static function sendMail($mod_params, $fields_array)
     {
@@ -116,12 +119,12 @@ class FeedbackHelper
             }
 
             if ($mod_params->mail_header) {
-                $output .= $mod_params->mail_header;
+                $output .= $mod_params->mail_header . "\n";
             }
 
             foreach ($fields_array as $item) {
                 if (!empty($item['value'])) {
-                    $output .= '<p><b>' . $item['label'] . ': </b><br/>' . $item['value'] . '</p>'. "\n";
+                    $output .= '<p><b>' . $item['label'] . ': </b><br/>' . $item['value'] . '</p>' . "\n";
                 }
             }
 
@@ -165,10 +168,10 @@ class FeedbackHelper
     /**
      * Method validation Fields
      *
-     * @param   array $fields_array
+     * @param   array   $fields_array
      * @throws
-     *
      * @return  array
+     * @since   1.0.0
      */
     public static function validationFields($fields_array)
     {
@@ -176,7 +179,7 @@ class FeedbackHelper
 
         $errors = [];
         foreach ($fields_array as $key => $item) {
-            if (empty($item['value']) && $item['required']) {
+            if (empty($item['value']) && $item['required'] && $item['type'] != 'hidden') {
                 $errors[] = [
                     'key' => $key,
                     'label' => $item['label'],
@@ -223,10 +226,10 @@ class FeedbackHelper
     /**
      * Method set Response
      *
-     * @param   array $response
-     * @param   array $message
-     *
+     * @param   array   $response
+     * @param   array   $message
      * @throws
+     * @since   1.0.0
      */
     public static function setResponse($response, $message)
     {
