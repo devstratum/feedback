@@ -8,16 +8,16 @@ Module is available in [Joomla! Extensions Directory™](https://extensions.joom
 
 * Create and manage form fields
 * Ajax support send and validation data
-* Fields types: text, tel, email, number, date, textarea
-* Joomla 4 CMS
+* Fields types: text, tel, email, number, date, textarea, hidden
+* Joomla 4, Joomla 5
 * Responsive design
 * Color theme: Light | Dark
 * Language: English | Russian
 
 ## Requirements
 
-* Joomla 4.1.0 or higher
-* PHP 7.2 or higher
+* Joomla 4.3.0 or higher
+* PHP 7.4 or higher
 
 ## Donate
 
@@ -52,7 +52,7 @@ Standart install in Joomla CMS -» Upload Module archive file -» **mod_feedback
 
 ## Info
 
-Version: 1.0.4  
+Version: 1.1.0  
 License: GNU GPL v2.0  
 Author: Sergey Osipov  
 Website: https://devstratum.ru  
