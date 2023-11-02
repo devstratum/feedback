@@ -4,6 +4,13 @@ Module-constructor of simple contact forms for Joomla CMS
 
 Module is available in [Joomla! Extensions Directory™](https://extensions.joomla.org/extension/feedback/)
 
+* [Features](#features)
+* [Requirements](#requirements)
+* [Donate](#donate)
+* [Install](#install)
+* [Overview](#overview)
+* [Info](#info)
+
 ## Features
 
 * Create and manage form fields
