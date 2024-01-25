@@ -31,7 +31,6 @@ Module is available in [Joomla! Extensions Directory™](https://extensions.joom
 You can support the author's products and new projects
 
 * [Donate via Tinkoff](https://pay.cloudtips.ru/p/1daecc1f)
-* [Donate via QIWI](https://my.qiwi.com/Sergei-OGTEJOc8mG)
 
 ## Install
 
