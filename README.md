@@ -57,9 +57,12 @@ Standart install in Joomla CMS -» Upload Module archive file -» **mod_feedback
 ![com_metadesc_01](https://github.com/devstratum/feedback/blob/main/mod_feedback_04.png)
 
 ## Info
+```
+Feedback
+Module-constructor of simple contact forms for Joomla CMS
 
-Version: 1.1.0  
-License: GNU GPL v2.0  
-Author: Sergey Osipov  
-Website: https://devstratum.ru  
-Email: info@devstratum.ru
+Version:  1.1.1 
+License:  GNU GPL v2.0 
+Author:   Sergey Osipov 
+Website:  https://devstratum.ru 
+Email:    info@devstratum.ru
