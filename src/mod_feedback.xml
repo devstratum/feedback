@@ -2,12 +2,12 @@
 <extension type="module" client="site" method="upgrade" version="4.3">
 	<name>MOD_FEEDBACK</name>
 	<author>Sergey Osipov</author>
-	<creationDate>01.11.2023</creationDate>
-	<copyright>Copyright (c) 2023 Sergey Osipov. All rights reserved.</copyright>
+	<creationDate>26.01.2024</creationDate>
+	<copyright>Copyright (c) 2024 Sergey Osipov. All rights reserved.</copyright>
 	<license>GNU General Public License v2.0</license>
 	<authorEmail>info@devstratum.ru</authorEmail>
 	<authorUrl>https://devstratum.ru</authorUrl>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 	<description>MOD_FEEDBACK_DESCRIPTION</description>
     <namespace path="src">Devstratum\Module\Feedback</namespace>
     <scriptfile>script.php</scriptfile>
